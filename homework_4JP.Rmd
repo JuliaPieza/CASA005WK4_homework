@@ -68,7 +68,7 @@ gii_shp <- gii_table %>%
 
 ```{r}
 #final table is gii_shp which is joined data by country
-
+####
 
 ```
 
