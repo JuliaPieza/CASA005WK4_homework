@@ -1,0 +1,75 @@
+---
+title: "wk4homework"
+author: "Julia Pieza"
+date: "2025-10-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(here)
+library(sf)
+library(tidyverse)
+library(ggplot2)
+library(janitor)
+
+#Join the global gender inequality index to spatial data of the World, creating a new column of difference in inequality between 2010 and 2019.And then share to GitHub
+
+#read in data csv and geojson
+
+```
+```{r}
+#Read in data 
+here::here()
+gii_data <- read_csv(here::here("data", "GII_data.csv"))
+world_shp <- st_read("data/World_Countries_(Generalized)_9029012925078512962.geojson")
+
+```
+```{r}
+#cleaning and filtering the GII data
+#new table with just iso, country, gii_2010, gii_2019
+#calculate difference between 2010 and 2019
+#then join to spatial file using country or iso
+
+gii_table <- gii_data %>%
+  select(iso3, country, gii_2010, gii_2019) %>%
+  mutate(diff_2010_2019 = gii_2019 - gii_2010) 
+
+world_shp <- world_shp %>%
+  janitor::clean_names()
+  
+gii_shp <- gii_table %>%
+  left_join(world_shp, by = "country")
+  
+```
+
+```{r}
+#final table is gii_shp which is joined data by country
+
+
+```
+
+
